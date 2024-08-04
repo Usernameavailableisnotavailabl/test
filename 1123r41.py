@@ -24,42 +24,31 @@ print('1)добавить пользовотеля ')
 print('2)удалить пользовотеля ')
 print('3)изменить пользовотеля ')
 print('0)выход ')
-a= int(input('введите значение от 1 до 3   '))
-if a == 0:
-    connection.commit()
-    connection.close()
-elif a == 1:
-    name1 = input("Введите ваше имя: ")
-    mail1 = input("Введите вашу почту: ")
-    age1 = input("Введите ваш возраст: ")
-    cursor.execute('INSERT INTO Пользователи (name, mail, age) VALUES (?, ?, ?)', (name1, mail1, age1))
-    connection.commit()
-    connection.close()
-if a == 2:
-    id = input("Введите id человека для удаления: ")
-    cursor.execute("DELETE FROM Пользователи WHERE ID = ?",(id,))
-    connection.commit()
-    connection.close()
-elif a == 3:
-    input_new = input('первое имя ')
-    input_change = input('второе имя  ')
-
-
-    sql = "UPDATE Пользователи SET name = ?" "WHERE name = ?"
-    cursor.execute(sql, [input_change, input_new])
-    connection.commit()
-    connection.close()
-else: a == 21311331131313313113311234213421341234124123412341241234123341234123412412334123413243124132414
-connection = sqlite3.connect('my_database.db')
-cursor = connection.cursor()
-cursor.execute('SELECT * FROM Пользователи')
-Пользователи = cursor.fetchall()
-for name in Пользователи:
-    print(name)
-connection.close()
-connection = sqlite3.connect('my_database.db')
-cursor = connection.cursor()
-connection = sqlite3.connect('my_database.db')
-cursor = connection.cursor()
-connection.commit()
-connection.close()
+a = int(input('введите значение от 0 до 3   '))
+match a:
+    case 0:
+        connection.commit()
+        connection.close()
+        print("Вы успешно вышли")
+    case 1:
+        name1 = input("Введите ваше имя: ")
+        mail1 = input("Введите вашу почту: ")
+        age1 = input("Введите ваш возраст: ")
+        cursor.execute('INSERT INTO Пользователи (name, mail, age) VALUES (?, ?, ?)', (name1, mail1, age1))
+        connection.commit()
+        connection.close()
+        print("Пользователь успешно добавлен")
+    case 2:
+        id = input("Введите id человека для удаления: ")
+        cursor.execute("DELETE FROM Пользователи WHERE ID = ?",(id,))
+        connection.commit()
+        connection.close()
+        print("Пользователь успешно удалён")
+    case 3:
+        input_new = input('Имя ользователя для изменения ')
+        input_change = input('Заменить имя на - ')
+        sql = "UPDATE Пользователи SET name = ?" "WHERE name = ?"
+        cursor.execute(sql, [input_change, input_new])
+        connection.commit()
+        connection.close()
+        print("Имя успешно изменено")
